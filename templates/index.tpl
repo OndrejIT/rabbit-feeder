@@ -39,7 +39,9 @@
 
 	<script>
 		function get_resources(resource){
-			toastr["info"]("In progress", resource);
+			if (resource !== 'light') {
+				toastr["info"]("In progress", resource);
+			}
 
 			$.ajax({
 				url: "{{ web_url }}/resources",
@@ -53,23 +55,6 @@
 				},
 				error: function(data, status, error){
 					toastr["error"](error, "Resource");
-				}
-			});
-		};
-
-		function get_light(status){
-			$.ajax({
-				url: "{{ web_url }}/lights",
-				dataType: "json",
-				type: "post",
-				contentType: "application/json",
-				data: {"light": status},
-
-				success: function(data, status, error){
-					toastr["success"](data["status"], data["resource"]);
-				},
-				error: function(data, status, error){
-					toastr["error"](error, "Light");
 				}
 			});
 		};
@@ -102,8 +87,7 @@
 		</h1>
 		<img src="{{ cam_stream_url }}">
 		<p>
-			<a onclick="get_light('on')" class="button">Light On</a>
-			<a onclick="get_light('off')" class="button">Light Off</a>
+			<a onclick="get_resources('light')" class="button">Light</a>
 			<a onclick="get_resources('food')" class="button">Food</a>
 			<a onclick="get_resources('water')" class="button">Water</a>
 		</p>

@@ -18,7 +18,7 @@ def is_authenticate(request, password):
 	return True if authorization == password else False
 
 
-def get_light(status):
+def light_on(status):
 	url = settings.CAM_LIGH_ON_URL if status else settings.CAM_LIGH_OFF_URL
 	header = {"Authorization": "Basic {0}".format(settings.CAM_BASIC_AUTH)}
 	req = urequests.get(url, headers=header)
